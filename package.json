@@ -30,5 +30,15 @@
     "style-loader": "^3.3.1",
     "webpack": "^5.69.0",
     "webpack-cli": "^4.9.2"
+  },
+  "eslintConfig": {
+    "extends": [
+      "airbnb/base",
+      "prettier"
+    ],
+    "rules": {
+      "no-console": "off",
+      "no-unused-vars": "warn"
+    }
   }
 }
