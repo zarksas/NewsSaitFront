@@ -1,10 +1,10 @@
 import state from "../state";
+import getComments from "../getComments";
 
 const renderNews = async () => {
   const News = document.querySelector(".all_news_block");
   News.textContent = "";
-  console.log(state.news);
-  state.news.forEach((news) => {
+  state.news.forEach((news, indexNews) => {
     const p = document.createElement("p");
     p.classList.add("title_p");
     p.textContent = news.title;
@@ -20,6 +20,7 @@ const renderNews = async () => {
       const back = document.createElement("p");
       back.classList.add("back");
       back.textContent = "Back";
+      getComments(state.news[indexNews]._id);
       back.addEventListener("click", () => {
         renderNews();
       });
