@@ -3,13 +3,13 @@ import getComments from "../getComments";
 
 const renderNews = async () => {
   const News = document.querySelector(".all_news_block");
+
   News.textContent = "";
   state.news.forEach((news, indexNews) => {
     const p = document.createElement("p");
     p.classList.add("title_p");
     p.textContent = news.title;
     News.append(p);
-
     p.addEventListener("click", () => {
       News.textContent = "";
       const title = document.createElement("h1");

@@ -58,6 +58,32 @@ var getFooter = function getFooter() {
 
 /***/ }),
 
+/***/ "./getCategory.js":
+/*!************************!*\
+  !*** ./getCategory.js ***!
+  \************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./state */ "./state.js");
+/* harmony import */ var _renders_renderCategory__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./renders/renderCategory */ "./renders/renderCategory.js");
+
+
+
+var getCategory = function getCategory() {
+  fetch("http://localhost:3000/category").then(function (res) {
+    return res.json();
+  }).then(function (categoryList) {
+    _state__WEBPACK_IMPORTED_MODULE_0__["default"].categories = categoryList;
+    (0,_renders_renderCategory__WEBPACK_IMPORTED_MODULE_1__["default"])();
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (getCategory);
+
+/***/ }),
+
 /***/ "./getComments.js":
 /*!************************!*\
   !*** ./getComments.js ***!
@@ -107,6 +133,32 @@ var getNews = function getNews() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (getNews);
+
+/***/ }),
+
+/***/ "./getNewsCategory.js":
+/*!****************************!*\
+  !*** ./getNewsCategory.js ***!
+  \****************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./state */ "./state.js");
+/* harmony import */ var _renders_renderNewsCategory__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./renders/renderNewsCategory */ "./renders/renderNewsCategory.js");
+
+
+
+var getNewsCategory = function getNewsCategory(id) {
+  fetch("http://localhost:3000/news/category/".concat(id)).then(function (res) {
+    return res.json();
+  }).then(function (news) {
+    _state__WEBPACK_IMPORTED_MODULE_0__["default"].newsCategory = news;
+    (0,_renders_renderNewsCategory__WEBPACK_IMPORTED_MODULE_1__["default"])();
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (getNewsCategory);
 
 /***/ }),
 
@@ -174,6 +226,37 @@ var addBlocks = function addBlocks() {
 
 /***/ }),
 
+/***/ "./renders/renderCategory.js":
+/*!***********************************!*\
+  !*** ./renders/renderCategory.js ***!
+  \***********************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../state */ "./state.js");
+/* harmony import */ var _getNewsCategory__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../getNewsCategory */ "./getNewsCategory.js");
+
+
+
+var renderCategory = function renderCategory(id) {
+  var categoriesBlock = document.querySelector(".categories_block");
+  categoriesBlock.textContent = "";
+  _state__WEBPACK_IMPORTED_MODULE_0__["default"].categories.forEach(function (category) {
+    var categoryParagraph = document.createElement("p");
+    categoryParagraph.classList.add("category_paragraph");
+    categoryParagraph.textContent = category.title;
+    categoryParagraph.addEventListener("click", function () {
+      (0,_getNewsCategory__WEBPACK_IMPORTED_MODULE_1__["default"])(category._id);
+    });
+    categoriesBlock.append(categoryParagraph);
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (renderCategory);
+
+/***/ }),
+
 /***/ "./renders/renderComments.js":
 /*!***********************************!*\
   !*** ./renders/renderComments.js ***!
@@ -201,7 +284,6 @@ var renderComments = /*#__PURE__*/function () {
             commetnsChap = document.createElement("p");
             commetnsChap.classList.add("comments_chap");
             commetnsChap.textContent = "Comments";
-            console.log(_state__WEBPACK_IMPORTED_MODULE_2__["default"].comments.name);
             _state__WEBPACK_IMPORTED_MODULE_2__["default"].comments.forEach(function (comment) {
               var titleParagraph = document.createElement("p");
               var comentatorParagraph = document.createElement("p");
@@ -214,7 +296,7 @@ var renderComments = /*#__PURE__*/function () {
             comentatorParagraph = document.querySelector(".commentator_paragraph");
             comentatorParagraph.before(commetnsChap);
 
-          case 8:
+          case 7:
           case "end":
             return _context.stop();
         }
@@ -298,6 +380,34 @@ var renderNews = /*#__PURE__*/function () {
 
 /***/ }),
 
+/***/ "./renders/renderNewsCategory.js":
+/*!***************************************!*\
+  !*** ./renders/renderNewsCategory.js ***!
+  \***************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../state */ "./state.js");
+/* harmony import */ var _getComments__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../getComments */ "./getComments.js");
+
+
+
+var renderNewsCategory = function renderNewsCategory() {
+  var allNewsBlock = document.querySelector(".all_news_block");
+  allNewsBlock.textContent = "";
+  _state__WEBPACK_IMPORTED_MODULE_0__["default"].newsCategory.forEach(function (news) {
+    var titleNewsParagraph = document.createElement("p");
+    titleNewsParagraph.classList.add("title_p");
+    titleNewsParagraph.textContent = news.title;
+    allNewsBlock.append(titleNewsParagraph);
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (renderNewsCategory);
+
+/***/ }),
+
 /***/ "./state.js":
 /*!******************!*\
   !*** ./state.js ***!
@@ -309,7 +419,8 @@ __webpack_require__.r(__webpack_exports__);
 var initialisationState = {
   news: [],
   categories: [],
-  comments: []
+  comments: [],
+  newsCategory: []
 };
 /* harmony default export */ __webpack_exports__["default"] = (initialisationState);
 
@@ -332,7 +443,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nfooter {\n    margin: auto;\n}\n\n.blockFirst {\n    height: 150px;\n    background-color: rgb(48, 42, 42);\n    text-align: center;\n    border-radius: 10px;\n}\n\n.blockFooter {\n    font-size: 16px;\n    line-height: 30px;\n    padding-top: 20px;\n}\n\nfooter a {\n    color: white;\n    text-decoration: none;\n}\n\nfooter a:hover {\n    color: orange;\n}\n\n.breakingNews {\n    margin-top: 10px;\n    height: 30px;\n    color: white;\n    cursor: pointer;\n    line-height: 25px;\n    background-color: red;\n}\n\n.breakingNews:hover {\n    color: orange;\n}\n\nfooter li {\n    color: white\n}\n\n\n\n\n\n\n\n\n* {\n  box-sizing: border-box;\n}\nbody {\n  margin: 0;\n}\n.title_p {\n  font-size: 18px;\n  margin-bottom:40px;\n  border-bottom: 1px dotted  black;\n  cursor: pointer;\n}\n.title_p:hover{\n color: blue;\n font-size: 22px;\n}\n.headermain {\n  width: 100%;\n  text-align: center;\n  /* border: 2px solid red; */\n  border-radius: 10px 10px 0 0;\n  justify-content: space-between;\n  margin: auto;\n  margin-bottom: 30px;\n}\n.title {\n  background-color: rgb(209, 3, 3);\n  color: bisque;\n  width: 100%;\n  margin: auto;\n  text-align: center;\n  font-size: 30px;\n  height: 90px;\n  /* border-radius: 10px 10px 0 0; */\n  line-height: 90px;\n  /* border: 0.5px solid white; */\n}\n.headerhome {\n  font-size: 10px;\n  background-color: black;\n  color: bisque;\n  display: flex;\n  justify-content: space-around;\n  height: 40px;\n  padding: 0 200px;\n  /* border-radius: 0 0 10px 10px; */\n  /* border: 0.5px solid white; */\n}\n.homeHeader {\n  cursor: pointer;\n  font-size: 20px;\n  display: flex;\n  justify-content: space-between;\n  margin: auto;\n  text-align: center;\n  align-items: center;\n  margin-left: 20px;\n}\n.homeHeader:hover {\n  color: orange;\n}\n.newsHeader {\n  cursor: pointer;\n  font-size: 20px;\n  margin: auto;\n  text-align: center;\n  align-items: center;\n}\n.newsHeader:hover {\n  color: orange;\n}\n.categoryHeader {\n  cursor: pointer;\n  font-size: 20px;\n  margin: auto;\n  text-align: center;\n  align-items: center;\n  margin-right: 20px;\n}\n.categoryHeader:hover {\n  color: orange;\n}\n.main_block {\n  display: flex;\n  max-width: 1140px;\n  min-height: 1100px;\n  justify-content: space-between;\n  margin: auto;\n}\n\n.all_news_block {\n  background-color: white;\n  height: 50%;\n  width: 70%;\n  box-shadow: 2px 2px 7px 5px grey;\n  border-radius: 20px;\n  padding: 20px;\n}\n\n.left_block {\n  min-height: 1000px;\n  width: 25%;\n  border-radius: 20px;\n}\n\n.categories_block {\n  min-height: 150px;\n  background-color: white;\n  margin-bottom: 50px;\n  box-shadow: 2px 2px 7px 5px grey;\n  border-radius: 20px;\n}\n\n.last_news {\n  min-height: 300px;\n  background-color: white;\n  box-shadow: 2px 2px 7px 5px grey;\n  border-radius: 20px;\n}\n\n.back {\n  text-align: right;\n  text-decoration: underline;\n  cursor: pointer;\n  color: blue;\n  font-size: 18px;\n}\n\n", "",{"version":3,"sources":["webpack://./style.css"],"names":[],"mappings":";AACA;IACI,YAAY;AAChB;;AAEA;IACI,aAAa;IACb,iCAAiC;IACjC,kBAAkB;IAClB,mBAAmB;AACvB;;AAEA;IACI,eAAe;IACf,iBAAiB;IACjB,iBAAiB;AACrB;;AAEA;IACI,YAAY;IACZ,qBAAqB;AACzB;;AAEA;IACI,aAAa;AACjB;;AAEA;IACI,gBAAgB;IAChB,YAAY;IACZ,YAAY;IACZ,eAAe;IACf,iBAAiB;IACjB,qBAAqB;AACzB;;AAEA;IACI,aAAa;AACjB;;AAEA;IACI;AACJ;;;;;;;;;AASA;EACE,sBAAsB;AACxB;AACA;EACE,SAAS;AACX;AACA;EACE,eAAe;EACf,kBAAkB;EAClB,gCAAgC;EAChC,eAAe;AACjB;AACA;CACC,WAAW;CACX,eAAe;AAChB;AACA;EACE,WAAW;EACX,kBAAkB;EAClB,2BAA2B;EAC3B,4BAA4B;EAC5B,8BAA8B;EAC9B,YAAY;EACZ,mBAAmB;AACrB;AACA;EACE,gCAAgC;EAChC,aAAa;EACb,WAAW;EACX,YAAY;EACZ,kBAAkB;EAClB,eAAe;EACf,YAAY;EACZ,kCAAkC;EAClC,iBAAiB;EACjB,+BAA+B;AACjC;AACA;EACE,eAAe;EACf,uBAAuB;EACvB,aAAa;EACb,aAAa;EACb,6BAA6B;EAC7B,YAAY;EACZ,gBAAgB;EAChB,kCAAkC;EAClC,+BAA+B;AACjC;AACA;EACE,eAAe;EACf,eAAe;EACf,aAAa;EACb,8BAA8B;EAC9B,YAAY;EACZ,kBAAkB;EAClB,mBAAmB;EACnB,iBAAiB;AACnB;AACA;EACE,aAAa;AACf;AACA;EACE,eAAe;EACf,eAAe;EACf,YAAY;EACZ,kBAAkB;EAClB,mBAAmB;AACrB;AACA;EACE,aAAa;AACf;AACA;EACE,eAAe;EACf,eAAe;EACf,YAAY;EACZ,kBAAkB;EAClB,mBAAmB;EACnB,kBAAkB;AACpB;AACA;EACE,aAAa;AACf;AACA;EACE,aAAa;EACb,iBAAiB;EACjB,kBAAkB;EAClB,8BAA8B;EAC9B,YAAY;AACd;;AAEA;EACE,uBAAuB;EACvB,WAAW;EACX,UAAU;EACV,gCAAgC;EAChC,mBAAmB;EACnB,aAAa;AACf;;AAEA;EACE,kBAAkB;EAClB,UAAU;EACV,mBAAmB;AACrB;;AAEA;EACE,iBAAiB;EACjB,uBAAuB;EACvB,mBAAmB;EACnB,gCAAgC;EAChC,mBAAmB;AACrB;;AAEA;EACE,iBAAiB;EACjB,uBAAuB;EACvB,gCAAgC;EAChC,mBAAmB;AACrB;;AAEA;EACE,iBAAiB;EACjB,0BAA0B;EAC1B,eAAe;EACf,WAAW;EACX,eAAe;AACjB","sourcesContent":["\nfooter {\n    margin: auto;\n}\n\n.blockFirst {\n    height: 150px;\n    background-color: rgb(48, 42, 42);\n    text-align: center;\n    border-radius: 10px;\n}\n\n.blockFooter {\n    font-size: 16px;\n    line-height: 30px;\n    padding-top: 20px;\n}\n\nfooter a {\n    color: white;\n    text-decoration: none;\n}\n\nfooter a:hover {\n    color: orange;\n}\n\n.breakingNews {\n    margin-top: 10px;\n    height: 30px;\n    color: white;\n    cursor: pointer;\n    line-height: 25px;\n    background-color: red;\n}\n\n.breakingNews:hover {\n    color: orange;\n}\n\nfooter li {\n    color: white\n}\n\n\n\n\n\n\n\n\n* {\n  box-sizing: border-box;\n}\nbody {\n  margin: 0;\n}\n.title_p {\n  font-size: 18px;\n  margin-bottom:40px;\n  border-bottom: 1px dotted  black;\n  cursor: pointer;\n}\n.title_p:hover{\n color: blue;\n font-size: 22px;\n}\n.headermain {\n  width: 100%;\n  text-align: center;\n  /* border: 2px solid red; */\n  border-radius: 10px 10px 0 0;\n  justify-content: space-between;\n  margin: auto;\n  margin-bottom: 30px;\n}\n.title {\n  background-color: rgb(209, 3, 3);\n  color: bisque;\n  width: 100%;\n  margin: auto;\n  text-align: center;\n  font-size: 30px;\n  height: 90px;\n  /* border-radius: 10px 10px 0 0; */\n  line-height: 90px;\n  /* border: 0.5px solid white; */\n}\n.headerhome {\n  font-size: 10px;\n  background-color: black;\n  color: bisque;\n  display: flex;\n  justify-content: space-around;\n  height: 40px;\n  padding: 0 200px;\n  /* border-radius: 0 0 10px 10px; */\n  /* border: 0.5px solid white; */\n}\n.homeHeader {\n  cursor: pointer;\n  font-size: 20px;\n  display: flex;\n  justify-content: space-between;\n  margin: auto;\n  text-align: center;\n  align-items: center;\n  margin-left: 20px;\n}\n.homeHeader:hover {\n  color: orange;\n}\n.newsHeader {\n  cursor: pointer;\n  font-size: 20px;\n  margin: auto;\n  text-align: center;\n  align-items: center;\n}\n.newsHeader:hover {\n  color: orange;\n}\n.categoryHeader {\n  cursor: pointer;\n  font-size: 20px;\n  margin: auto;\n  text-align: center;\n  align-items: center;\n  margin-right: 20px;\n}\n.categoryHeader:hover {\n  color: orange;\n}\n.main_block {\n  display: flex;\n  max-width: 1140px;\n  min-height: 1100px;\n  justify-content: space-between;\n  margin: auto;\n}\n\n.all_news_block {\n  background-color: white;\n  height: 50%;\n  width: 70%;\n  box-shadow: 2px 2px 7px 5px grey;\n  border-radius: 20px;\n  padding: 20px;\n}\n\n.left_block {\n  min-height: 1000px;\n  width: 25%;\n  border-radius: 20px;\n}\n\n.categories_block {\n  min-height: 150px;\n  background-color: white;\n  margin-bottom: 50px;\n  box-shadow: 2px 2px 7px 5px grey;\n  border-radius: 20px;\n}\n\n.last_news {\n  min-height: 300px;\n  background-color: white;\n  box-shadow: 2px 2px 7px 5px grey;\n  border-radius: 20px;\n}\n\n.back {\n  text-align: right;\n  text-decoration: underline;\n  cursor: pointer;\n  color: blue;\n  font-size: 18px;\n}\n\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nfooter {\n    margin: auto;\n}\n\n.blockFirst {\n    height: 150px;\n    background-color: rgb(48, 42, 42);\n    text-align: center;\n    border-radius: 10px;\n}\n\n.blockFooter {\n    font-size: 16px;\n    line-height: 30px;\n    padding-top: 20px;\n}\n\nfooter a {\n    color: white;\n    text-decoration: none;\n}\n\nfooter a:hover {\n    color: orange;\n}\n\n.breakingNews {\n    margin-top: 10px;\n    height: 30px;\n    color: white;\n    cursor: pointer;\n    line-height: 25px;\n    background-color: red;\n}\n\n.breakingNews:hover {\n    color: orange;\n}\n\nfooter li {\n    color: white\n}\n\n* {\n  box-sizing: border-box;\n}\nbody {\n  margin: 0;\n}\n.title_p {\n  font-size: 18px;\n  margin-bottom:40px;\n  border-bottom: 1px dotted  black;\n  cursor: pointer;\n}\n.title_p:hover{\n color: blue;\n font-size: 22px;\n}\n.headermain {\n  width: 100%;\n  text-align: center;\n  /* border: 2px solid red; */\n  border-radius: 10px 10px 0 0;\n  justify-content: space-between;\n  margin: auto;\n  margin-bottom: 30px;\n}\n.title {\n  background-color: rgb(209, 3, 3);\n  color: bisque;\n  width: 100%;\n  margin: auto;\n  text-align: center;\n  font-size: 30px;\n  height: 90px;\n  /* border-radius: 10px 10px 0 0; */\n  line-height: 90px;\n  /* border: 0.5px solid white; */\n}\n.headerhome {\n  font-size: 10px;\n  background-color: black;\n  color: bisque;\n  display: flex;\n  justify-content: space-around;\n  height: 40px;\n  padding: 0 200px;\n  /* border-radius: 0 0 10px 10px; */\n  /* border: 0.5px solid white; */\n}\n.homeHeader {\n  cursor: pointer;\n  font-size: 20px;\n  display: flex;\n  justify-content: space-between;\n  margin: auto;\n  text-align: center;\n  align-items: center;\n  margin-left: 20px;\n}\n.homeHeader:hover {\n  color: orange;\n}\n.newsHeader {\n  cursor: pointer;\n  font-size: 20px;\n  margin: auto;\n  text-align: center;\n  align-items: center;\n}\n.newsHeader:hover {\n  color: orange;\n}\n.categoryHeader {\n  cursor: pointer;\n  font-size: 20px;\n  margin: auto;\n  text-align: center;\n  align-items: center;\n  margin-right: 20px;\n}\n.categoryHeader:hover {\n  color: orange;\n}\n.main_block {\n  display: flex;\n  max-width: 1140px;\n  min-height: 1100px;\n  justify-content: space-between;\n  margin: auto;\n}\n\n.all_news_block {\n  background-color: white;\n  height: 50%;\n  width: 70%;\n  box-shadow: 2px 2px 7px 5px grey;\n  border-radius: 20px;\n  padding: 20px;\n}\n\n.left_block {\n  min-height: 1000px;\n  width: 25%;\n  border-radius: 20px;\n}\n\n.categories_block {\n  min-height: 150px;\n  background-color: white;\n  margin-bottom: 50px;\n  box-shadow: 2px 2px 7px 5px grey;\n  border-radius: 20px;\n}\n\n.last_news {\n  min-height: 300px;\n  background-color: white;\n  box-shadow: 2px 2px 7px 5px grey;\n  border-radius: 20px;\n}\n\n.back {\n  text-align: right;\n  text-decoration: underline;\n  cursor: pointer;\n  color: blue;\n  font-size: 18px;\n}\n\n", "",{"version":3,"sources":["webpack://./style.css"],"names":[],"mappings":";AACA;IACI,YAAY;AAChB;;AAEA;IACI,aAAa;IACb,iCAAiC;IACjC,kBAAkB;IAClB,mBAAmB;AACvB;;AAEA;IACI,eAAe;IACf,iBAAiB;IACjB,iBAAiB;AACrB;;AAEA;IACI,YAAY;IACZ,qBAAqB;AACzB;;AAEA;IACI,aAAa;AACjB;;AAEA;IACI,gBAAgB;IAChB,YAAY;IACZ,YAAY;IACZ,eAAe;IACf,iBAAiB;IACjB,qBAAqB;AACzB;;AAEA;IACI,aAAa;AACjB;;AAEA;IACI;AACJ;;AAEA;EACE,sBAAsB;AACxB;AACA;EACE,SAAS;AACX;AACA;EACE,eAAe;EACf,kBAAkB;EAClB,gCAAgC;EAChC,eAAe;AACjB;AACA;CACC,WAAW;CACX,eAAe;AAChB;AACA;EACE,WAAW;EACX,kBAAkB;EAClB,2BAA2B;EAC3B,4BAA4B;EAC5B,8BAA8B;EAC9B,YAAY;EACZ,mBAAmB;AACrB;AACA;EACE,gCAAgC;EAChC,aAAa;EACb,WAAW;EACX,YAAY;EACZ,kBAAkB;EAClB,eAAe;EACf,YAAY;EACZ,kCAAkC;EAClC,iBAAiB;EACjB,+BAA+B;AACjC;AACA;EACE,eAAe;EACf,uBAAuB;EACvB,aAAa;EACb,aAAa;EACb,6BAA6B;EAC7B,YAAY;EACZ,gBAAgB;EAChB,kCAAkC;EAClC,+BAA+B;AACjC;AACA;EACE,eAAe;EACf,eAAe;EACf,aAAa;EACb,8BAA8B;EAC9B,YAAY;EACZ,kBAAkB;EAClB,mBAAmB;EACnB,iBAAiB;AACnB;AACA;EACE,aAAa;AACf;AACA;EACE,eAAe;EACf,eAAe;EACf,YAAY;EACZ,kBAAkB;EAClB,mBAAmB;AACrB;AACA;EACE,aAAa;AACf;AACA;EACE,eAAe;EACf,eAAe;EACf,YAAY;EACZ,kBAAkB;EAClB,mBAAmB;EACnB,kBAAkB;AACpB;AACA;EACE,aAAa;AACf;AACA;EACE,aAAa;EACb,iBAAiB;EACjB,kBAAkB;EAClB,8BAA8B;EAC9B,YAAY;AACd;;AAEA;EACE,uBAAuB;EACvB,WAAW;EACX,UAAU;EACV,gCAAgC;EAChC,mBAAmB;EACnB,aAAa;AACf;;AAEA;EACE,kBAAkB;EAClB,UAAU;EACV,mBAAmB;AACrB;;AAEA;EACE,iBAAiB;EACjB,uBAAuB;EACvB,mBAAmB;EACnB,gCAAgC;EAChC,mBAAmB;AACrB;;AAEA;EACE,iBAAiB;EACjB,uBAAuB;EACvB,gCAAgC;EAChC,mBAAmB;AACrB;;AAEA;EACE,iBAAiB;EACjB,0BAA0B;EAC1B,eAAe;EACf,WAAW;EACX,eAAe;AACjB","sourcesContent":["\nfooter {\n    margin: auto;\n}\n\n.blockFirst {\n    height: 150px;\n    background-color: rgb(48, 42, 42);\n    text-align: center;\n    border-radius: 10px;\n}\n\n.blockFooter {\n    font-size: 16px;\n    line-height: 30px;\n    padding-top: 20px;\n}\n\nfooter a {\n    color: white;\n    text-decoration: none;\n}\n\nfooter a:hover {\n    color: orange;\n}\n\n.breakingNews {\n    margin-top: 10px;\n    height: 30px;\n    color: white;\n    cursor: pointer;\n    line-height: 25px;\n    background-color: red;\n}\n\n.breakingNews:hover {\n    color: orange;\n}\n\nfooter li {\n    color: white\n}\n\n* {\n  box-sizing: border-box;\n}\nbody {\n  margin: 0;\n}\n.title_p {\n  font-size: 18px;\n  margin-bottom:40px;\n  border-bottom: 1px dotted  black;\n  cursor: pointer;\n}\n.title_p:hover{\n color: blue;\n font-size: 22px;\n}\n.headermain {\n  width: 100%;\n  text-align: center;\n  /* border: 2px solid red; */\n  border-radius: 10px 10px 0 0;\n  justify-content: space-between;\n  margin: auto;\n  margin-bottom: 30px;\n}\n.title {\n  background-color: rgb(209, 3, 3);\n  color: bisque;\n  width: 100%;\n  margin: auto;\n  text-align: center;\n  font-size: 30px;\n  height: 90px;\n  /* border-radius: 10px 10px 0 0; */\n  line-height: 90px;\n  /* border: 0.5px solid white; */\n}\n.headerhome {\n  font-size: 10px;\n  background-color: black;\n  color: bisque;\n  display: flex;\n  justify-content: space-around;\n  height: 40px;\n  padding: 0 200px;\n  /* border-radius: 0 0 10px 10px; */\n  /* border: 0.5px solid white; */\n}\n.homeHeader {\n  cursor: pointer;\n  font-size: 20px;\n  display: flex;\n  justify-content: space-between;\n  margin: auto;\n  text-align: center;\n  align-items: center;\n  margin-left: 20px;\n}\n.homeHeader:hover {\n  color: orange;\n}\n.newsHeader {\n  cursor: pointer;\n  font-size: 20px;\n  margin: auto;\n  text-align: center;\n  align-items: center;\n}\n.newsHeader:hover {\n  color: orange;\n}\n.categoryHeader {\n  cursor: pointer;\n  font-size: 20px;\n  margin: auto;\n  text-align: center;\n  align-items: center;\n  margin-right: 20px;\n}\n.categoryHeader:hover {\n  color: orange;\n}\n.main_block {\n  display: flex;\n  max-width: 1140px;\n  min-height: 1100px;\n  justify-content: space-between;\n  margin: auto;\n}\n\n.all_news_block {\n  background-color: white;\n  height: 50%;\n  width: 70%;\n  box-shadow: 2px 2px 7px 5px grey;\n  border-radius: 20px;\n  padding: 20px;\n}\n\n.left_block {\n  min-height: 1000px;\n  width: 25%;\n  border-radius: 20px;\n}\n\n.categories_block {\n  min-height: 150px;\n  background-color: white;\n  margin-bottom: 50px;\n  box-shadow: 2px 2px 7px 5px grey;\n  border-radius: 20px;\n}\n\n.last_news {\n  min-height: 300px;\n  background-color: white;\n  box-shadow: 2px 2px 7px 5px grey;\n  border-radius: 20px;\n}\n\n.back {\n  text-align: right;\n  text-decoration: underline;\n  cursor: pointer;\n  color: blue;\n  font-size: 18px;\n}\n\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -1740,7 +1851,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./header */ "./header.js");
 /* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./main */ "./main.js");
 /* harmony import */ var _style__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./style */ "./style.css");
-/* harmony import */ var _getComments__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./getComments */ "./getComments.js");
+/* harmony import */ var _getCategory__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./getCategory */ "./getCategory.js");
 /* harmony import */ var _getNews__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./getNews */ "./getNews.js");
 // eslint-disable-next-line import/no-unresolved
 
@@ -1751,6 +1862,7 @@ __webpack_require__.r(__webpack_exports__);
 
 (0,_main__WEBPACK_IMPORTED_MODULE_2__["default"])();
 (0,_getNews__WEBPACK_IMPORTED_MODULE_5__["default"])();
+(0,_getCategory__WEBPACK_IMPORTED_MODULE_4__["default"])();
 (0,_header__WEBPACK_IMPORTED_MODULE_1__["default"])();
 (0,_footer__WEBPACK_IMPORTED_MODULE_0__["default"])();
 }();
