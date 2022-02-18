@@ -5,6 +5,7 @@ const renderNews = async () => {
   console.log(state.news);
   state.news.forEach((news) => {
     const p = document.createElement("p");
+    p.classList.add("title_p");
     p.textContent = news.title;
     News.append(p);
   });
