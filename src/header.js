@@ -1,8 +1,13 @@
+import renderNews from "./renders/renderNews";
+
 const header = () => {
   const headerMain = document.createElement("header");
   const titleDiv = document.createElement("div");
   const headerHome = document.createElement("div");
   const homeDiv = document.createElement("div");
+  homeDiv.addEventListener("click", () => {
+    renderNews();
+  });
   const newsDiv = document.createElement("div");
   const categoryDiv = document.createElement("div");
 

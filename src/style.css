@@ -1,53 +1,45 @@
-
 footer {
-    margin: auto;
+  margin: auto;
 }
 
 .blockFirst {
-    height: 150px;
-    background-color: rgb(48, 42, 42);
-    text-align: center;
-    border-radius: 10px;
+  height: 150px;
+  background-color: rgb(48, 42, 42);
+  text-align: center;
+  border-radius: 10px;
 }
 
 .blockFooter {
-    font-size: 16px;
-    line-height: 30px;
-    padding-top: 20px;
+  font-size: 16px;
+  line-height: 30px;
+  padding-top: 20px;
 }
 
 footer a {
-    color: white;
-    text-decoration: none;
+  color: white;
+  text-decoration: none;
 }
 
 footer a:hover {
-    color: orange;
+  color: orange;
 }
 
 .breakingNews {
-    margin-top: 10px;
-    height: 30px;
-    color: white;
-    cursor: pointer;
-    line-height: 25px;
-    background-color: red;
+  margin-top: 10px;
+  height: 30px;
+  color: white;
+  cursor: pointer;
+  line-height: 25px;
+  background-color: red;
 }
 
 .breakingNews:hover {
-    color: orange;
+  color: orange;
 }
 
 footer li {
-    color: white
+  color: white;
 }
-
-
-
-
-
-
-
 
 * {
   box-sizing: border-box;
@@ -57,13 +49,13 @@ body {
 }
 .title_p {
   font-size: 18px;
-  margin-bottom:40px;
-  border-bottom: 1px dotted  black;
+  margin-bottom: 40px;
+  border-bottom: 1px dotted black;
   cursor: pointer;
 }
-.title_p:hover{
- color: blue;
- font-size: 22px;
+.title_p:hover {
+  color: blue;
+  font-size: 22px;
 }
 .headermain {
   width: 100%;
@@ -143,9 +135,9 @@ body {
   background-color: white;
   height: 50%;
   width: 70%;
-  box-shadow: 2px 2px 7px 5px grey;
-  border-radius: 20px;
+  box-shadow: 14px 10px 36px -4px rgba(34, 60, 80, 0.2);  border-radius: 20px;
   padding: 20px;
+  border: 2px solid black;
 }
 
 .left_block {
@@ -158,15 +150,17 @@ body {
   min-height: 150px;
   background-color: white;
   margin-bottom: 50px;
-  box-shadow: 2px 2px 7px 5px grey;
-  border-radius: 20px;
+  box-shadow: 14px 10px 36px -4px rgba(34, 60, 80, 0.2);
+    border-radius: 20px;
+    border: 2px solid black;
 }
 
 .last_news {
   min-height: 300px;
   background-color: white;
-  box-shadow: 2px 2px 7px 5px grey;
+  box-shadow: 14px 10px 36px -4px rgba(34, 60, 80, 0.2);
   border-radius: 20px;
+  border: 2px solid black;
 }
 
 .back {
@@ -176,4 +170,25 @@ body {
   color: blue;
   font-size: 18px;
 }
-
+.commentator_paragraph {
+  color: rgb(5, 5, 104);
+  font-weight: bold;
+  font-size: 18px;
+  font-family: sans-serif;
+}
+.commentator_paragraph:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.title_paragraph {
+  /* border-bottom: 1px solid black; */
+  /* opacity: 0.25; */
+  margin-left: 10px;
+}
+.comments_chap{
+  font-weight: bold;
+  margin-top: 90px;
+  border-top: 1px solid black;
+  line-height: 80px;
+  font-size: 24px;
+}
