@@ -207,7 +207,6 @@ var renderComments = /*#__PURE__*/function () {
             commetnsChap = document.createElement("p");
             commetnsChap.classList.add("comments_chap");
             commetnsChap.textContent = "Comments:";
-            console.log(_state__WEBPACK_IMPORTED_MODULE_2__["default"].comments.name);
             _state__WEBPACK_IMPORTED_MODULE_2__["default"].comments.forEach(function (comment) {
               var titleParagraph = document.createElement("p");
               var comentatorParagraph = document.createElement("p");
@@ -220,7 +219,7 @@ var renderComments = /*#__PURE__*/function () {
             comentatorParagraph = document.querySelector(".commentator_paragraph");
             comentatorParagraph.before(commetnsChap);
 
-          case 8:
+          case 7:
           case "end":
             return _context.stop();
         }
