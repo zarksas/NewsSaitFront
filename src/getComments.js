@@ -6,7 +6,7 @@ const getComments = () => {
     .then((res) => res.json())
     .then((commentsList) => {
       state.comments = commentsList;
-      renderNews();
+      // renderNews();
     });
 };
 
