@@ -1,3 +1,54 @@
+
+footer {
+    margin: auto;
+}
+
+.blockFirst {
+    height: 150px;
+    background-color: rgb(48, 42, 42);
+    text-align: center;
+    border-radius: 10px;
+}
+
+.blockFooter {
+    font-size: 16px;
+    line-height: 30px;
+    padding-top: 20px;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: orange;
+}
+
+.breakingNews {
+    margin-top: 10px;
+    height: 30px;
+    color: white;
+    cursor: pointer;
+    line-height: 25px;
+    background-color: red;
+}
+
+.breakingNews:hover {
+    color: orange;
+}
+
+footer li {
+    color: white
+}
+
+
+
+
+
+
+
+
 * {
   box-sizing: border-box;
 }
@@ -117,3 +168,4 @@ body {
   box-shadow: 2px 2px 7px 5px grey;
   border-radius: 20px;
 }
+
