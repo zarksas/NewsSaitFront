@@ -5,7 +5,6 @@ const renderComments = async () => {
   const commetnsChap = document.createElement("p");
   commetnsChap.classList.add("comments_chap");
   commetnsChap.textContent = "Comments";
-  console.log(state.comments.name);
   state.comments.forEach((comment) => {
     const titleParagraph = document.createElement("p");
     const comentatorParagraph = document.createElement("p");
