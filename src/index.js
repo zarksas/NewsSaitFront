@@ -11,3 +11,9 @@ getNews();
 getCategory();
 header();
 getFooter();
+
+const homeDiv = document.querySelector(".homeHeader");
+
+homeDiv.addEventListener("click", () => {
+  getNews();
+});
