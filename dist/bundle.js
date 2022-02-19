@@ -58,6 +58,32 @@ var getFooter = function getFooter() {
 
 /***/ }),
 
+/***/ "./getCategory.js":
+/*!************************!*\
+  !*** ./getCategory.js ***!
+  \************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./state */ "./state.js");
+/* harmony import */ var _renders_renderCategory__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./renders/renderCategory */ "./renders/renderCategory.js");
+
+
+
+var getCategory = function getCategory() {
+  fetch("http://localhost:3000/category").then(function (res) {
+    return res.json();
+  }).then(function (categoryList) {
+    _state__WEBPACK_IMPORTED_MODULE_0__["default"].categories = categoryList;
+    (0,_renders_renderCategory__WEBPACK_IMPORTED_MODULE_1__["default"])();
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (getCategory);
+
+/***/ }),
+
 /***/ "./getComments.js":
 /*!************************!*\
   !*** ./getComments.js ***!
@@ -107,6 +133,32 @@ var getNews = function getNews() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (getNews);
+
+/***/ }),
+
+/***/ "./getNewsCategory.js":
+/*!****************************!*\
+  !*** ./getNewsCategory.js ***!
+  \****************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./state */ "./state.js");
+/* harmony import */ var _renders_renderNews__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./renders/renderNews */ "./renders/renderNews.js");
+
+
+
+var getNewsCategory = function getNewsCategory(id) {
+  fetch("http://localhost:3000/news/category/".concat(id)).then(function (res) {
+    return res.json();
+  }).then(function (news) {
+    _state__WEBPACK_IMPORTED_MODULE_0__["default"].news = news;
+    (0,_renders_renderNews__WEBPACK_IMPORTED_MODULE_1__["default"])();
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (getNewsCategory);
 
 /***/ }),
 
@@ -180,6 +232,37 @@ var addBlocks = function addBlocks() {
 
 /***/ }),
 
+/***/ "./renders/renderCategory.js":
+/*!***********************************!*\
+  !*** ./renders/renderCategory.js ***!
+  \***********************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../state */ "./state.js");
+/* harmony import */ var _getNewsCategory__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../getNewsCategory */ "./getNewsCategory.js");
+
+
+
+var renderCategory = function renderCategory() {
+  var categoriesBlock = document.querySelector(".categories_block");
+  categoriesBlock.textContent = "";
+  _state__WEBPACK_IMPORTED_MODULE_0__["default"].categories.forEach(function (category) {
+    var categoryParagraph = document.createElement("p");
+    categoryParagraph.classList.add("category_paragraph");
+    categoryParagraph.textContent = category.title;
+    categoryParagraph.addEventListener("click", function () {
+      (0,_getNewsCategory__WEBPACK_IMPORTED_MODULE_1__["default"])(category._id);
+    });
+    categoriesBlock.append(categoryParagraph);
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (renderCategory);
+
+/***/ }),
+
 /***/ "./renders/renderComments.js":
 /*!***********************************!*\
   !*** ./renders/renderComments.js ***!
@@ -206,7 +289,9 @@ var renderComments = /*#__PURE__*/function () {
             lastNews = document.querySelector(".all_news_block");
             commetnsChap = document.createElement("p");
             commetnsChap.classList.add("comments_chap");
+            
             commetnsChap.textContent = "Comments:";
+
             _state__WEBPACK_IMPORTED_MODULE_2__["default"].comments.forEach(function (comment) {
               var titleParagraph = document.createElement("p");
               var comentatorParagraph = document.createElement("p");
@@ -337,7 +422,9 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
+
 ___CSS_LOADER_EXPORT___.push([module.id, "footer {\r\n  margin: auto;\r\n}\r\n\r\n.blockFirst {\r\n  height: 150px;\r\n  background-color: rgb(48, 42, 42);\r\n  text-align: center;\r\n  border-radius: 10px;\r\n}\r\n\r\n.blockFooter {\r\n  font-size: 16px;\r\n  line-height: 30px;\r\n  padding-top: 20px;\r\n}\r\n\r\nfooter a {\r\n  color: white;\r\n  text-decoration: none;\r\n}\r\n\r\nfooter a:hover {\r\n  color: orange;\r\n}\r\n\r\n.breakingNews {\r\n  margin-top: 10px;\r\n  height: 30px;\r\n  color: white;\r\n  cursor: pointer;\r\n  line-height: 25px;\r\n  background-color: red;\r\n}\r\n\r\n.breakingNews:hover {\r\n  color: orange;\r\n}\r\n\r\nfooter li {\r\n  color: white;\r\n}\r\n\r\n* {\r\n  box-sizing: border-box;\r\n}\r\nbody {\r\n  margin: 0;\r\n}\r\n.title_p {\r\n  font-size: 18px;\r\n  margin-bottom: 40px;\r\n  border-bottom: 1px dotted black;\r\n  cursor: pointer;\r\n}\r\n.title_p:hover {\r\n  color: blue;\r\n  font-size: 22px;\r\n}\r\n.headermain {\r\n  width: 100%;\r\n  text-align: center;\r\n  /* border: 2px solid red; */\r\n  border-radius: 10px 10px 0 0;\r\n  justify-content: space-between;\r\n  margin: auto;\r\n  margin-bottom: 30px;\r\n}\r\n.title {\r\n  background-color: rgb(209, 3, 3);\r\n  color: bisque;\r\n  width: 100%;\r\n  margin: auto;\r\n  text-align: center;\r\n  font-size: 30px;\r\n  height: 90px;\r\n  /* border-radius: 10px 10px 0 0; */\r\n  line-height: 90px;\r\n  /* border: 0.5px solid white; */\r\n}\r\n.headerhome {\r\n  font-size: 10px;\r\n  background-color: black;\r\n  color: bisque;\r\n  display: flex;\r\n  justify-content: space-around;\r\n  height: 40px;\r\n  padding: 0 200px;\r\n  /* border-radius: 0 0 10px 10px; */\r\n  /* border: 0.5px solid white; */\r\n}\r\n.homeHeader {\r\n  cursor: pointer;\r\n  font-size: 20px;\r\n  display: flex;\r\n  justify-content: space-between;\r\n  margin: auto;\r\n  text-align: center;\r\n  align-items: center;\r\n  margin-left: 20px;\r\n}\r\n.homeHeader:hover {\r\n  color: orange;\r\n}\r\n.newsHeader {\r\n  cursor: pointer;\r\n  font-size: 20px;\r\n  margin: auto;\r\n  text-align: center;\r\n  align-items: center;\r\n}\r\n.newsHeader:hover {\r\n  color: orange;\r\n}\r\n.categoryHeader {\r\n  cursor: pointer;\r\n  font-size: 20px;\r\n  margin: auto;\r\n  text-align: center;\r\n  align-items: center;\r\n  margin-right: 20px;\r\n}\r\n.categoryHeader:hover {\r\n  color: orange;\r\n}\r\n.main_block {\r\n  display: flex;\r\n  max-width: 1140px;\r\n  min-height: 1100px;\r\n  justify-content: space-between;\r\n  margin: auto;\r\n}\r\n\r\n.all_news_block {\r\n  background-color: white;\r\n  height: 50%;\r\n  width: 70%;\r\n  box-shadow: 14px 10px 36px -4px rgba(34, 60, 80, 0.2);  border-radius: 20px;\r\n  padding: 20px;\r\n  border: 2px solid black;\r\n}\r\n\r\n.left_block {\r\n  min-height: 1000px;\r\n  width: 25%;\r\n  border-radius: 20px;\r\n}\r\n\r\n.categories_block {\r\n  min-height: 150px;\r\n  background-color: white;\r\n  margin-bottom: 50px;\r\n  box-shadow: 14px 10px 36px -4px rgba(34, 60, 80, 0.2);\r\n    border-radius: 20px;\r\n    border: 2px solid black;\r\n}\r\n\r\n.last_news {\r\n  min-height: 300px;\r\n  background-color: white;\r\n  box-shadow: 14px 10px 36px -4px rgba(34, 60, 80, 0.2);\r\n  border-radius: 20px;\r\n  border: 2px solid black;\r\n}\r\n\r\n.back {\r\n  text-align: right;\r\n  text-decoration: underline;\r\n  cursor: pointer;\r\n  color: blue;\r\n  font-size: 18px;\r\n}\r\n.commentator_paragraph {\r\n  color: rgb(5, 5, 104);\r\n  font-weight: bold;\r\n  font-size: 18px;\r\n  font-family: sans-serif;\r\n}\r\n.commentator_paragraph:hover {\r\n  text-decoration: underline;\r\n  cursor: pointer;\r\n}\r\n.title_paragraph {\r\n  /* border-bottom: 1px solid black; */\r\n  /* opacity: 0.25; */\r\n  margin-left: 10px;\r\n}\r\n.comments_chap{\r\n  font-weight: bold;\r\n  margin-top: 90px;\r\n  border-top: 1px solid black;\r\n  line-height: 80px;\r\n  font-size: 24px;\r\n}", "",{"version":3,"sources":["webpack://./style.css"],"names":[],"mappings":"AAAA;EACE,YAAY;AACd;;AAEA;EACE,aAAa;EACb,iCAAiC;EACjC,kBAAkB;EAClB,mBAAmB;AACrB;;AAEA;EACE,eAAe;EACf,iBAAiB;EACjB,iBAAiB;AACnB;;AAEA;EACE,YAAY;EACZ,qBAAqB;AACvB;;AAEA;EACE,aAAa;AACf;;AAEA;EACE,gBAAgB;EAChB,YAAY;EACZ,YAAY;EACZ,eAAe;EACf,iBAAiB;EACjB,qBAAqB;AACvB;;AAEA;EACE,aAAa;AACf;;AAEA;EACE,YAAY;AACd;;AAEA;EACE,sBAAsB;AACxB;AACA;EACE,SAAS;AACX;AACA;EACE,eAAe;EACf,mBAAmB;EACnB,+BAA+B;EAC/B,eAAe;AACjB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,WAAW;EACX,kBAAkB;EAClB,2BAA2B;EAC3B,4BAA4B;EAC5B,8BAA8B;EAC9B,YAAY;EACZ,mBAAmB;AACrB;AACA;EACE,gCAAgC;EAChC,aAAa;EACb,WAAW;EACX,YAAY;EACZ,kBAAkB;EAClB,eAAe;EACf,YAAY;EACZ,kCAAkC;EAClC,iBAAiB;EACjB,+BAA+B;AACjC;AACA;EACE,eAAe;EACf,uBAAuB;EACvB,aAAa;EACb,aAAa;EACb,6BAA6B;EAC7B,YAAY;EACZ,gBAAgB;EAChB,kCAAkC;EAClC,+BAA+B;AACjC;AACA;EACE,eAAe;EACf,eAAe;EACf,aAAa;EACb,8BAA8B;EAC9B,YAAY;EACZ,kBAAkB;EAClB,mBAAmB;EACnB,iBAAiB;AACnB;AACA;EACE,aAAa;AACf;AACA;EACE,eAAe;EACf,eAAe;EACf,YAAY;EACZ,kBAAkB;EAClB,mBAAmB;AACrB;AACA;EACE,aAAa;AACf;AACA;EACE,eAAe;EACf,eAAe;EACf,YAAY;EACZ,kBAAkB;EAClB,mBAAmB;EACnB,kBAAkB;AACpB;AACA;EACE,aAAa;AACf;AACA;EACE,aAAa;EACb,iBAAiB;EACjB,kBAAkB;EAClB,8BAA8B;EAC9B,YAAY;AACd;;AAEA;EACE,uBAAuB;EACvB,WAAW;EACX,UAAU;EACV,qDAAqD,GAAG,mBAAmB;EAC3E,aAAa;EACb,uBAAuB;AACzB;;AAEA;EACE,kBAAkB;EAClB,UAAU;EACV,mBAAmB;AACrB;;AAEA;EACE,iBAAiB;EACjB,uBAAuB;EACvB,mBAAmB;EACnB,qDAAqD;IACnD,mBAAmB;IACnB,uBAAuB;AAC3B;;AAEA;EACE,iBAAiB;EACjB,uBAAuB;EACvB,qDAAqD;EACrD,mBAAmB;EACnB,uBAAuB;AACzB;;AAEA;EACE,iBAAiB;EACjB,0BAA0B;EAC1B,eAAe;EACf,WAAW;EACX,eAAe;AACjB;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,eAAe;EACf,uBAAuB;AACzB;AACA;EACE,0BAA0B;EAC1B,eAAe;AACjB;AACA;EACE,oCAAoC;EACpC,mBAAmB;EACnB,iBAAiB;AACnB;AACA;EACE,iBAAiB;EACjB,gBAAgB;EAChB,2BAA2B;EAC3B,iBAAiB;EACjB,eAAe;AACjB","sourcesContent":["footer {\r\n  margin: auto;\r\n}\r\n\r\n.blockFirst {\r\n  height: 150px;\r\n  background-color: rgb(48, 42, 42);\r\n  text-align: center;\r\n  border-radius: 10px;\r\n}\r\n\r\n.blockFooter {\r\n  font-size: 16px;\r\n  line-height: 30px;\r\n  padding-top: 20px;\r\n}\r\n\r\nfooter a {\r\n  color: white;\r\n  text-decoration: none;\r\n}\r\n\r\nfooter a:hover {\r\n  color: orange;\r\n}\r\n\r\n.breakingNews {\r\n  margin-top: 10px;\r\n  height: 30px;\r\n  color: white;\r\n  cursor: pointer;\r\n  line-height: 25px;\r\n  background-color: red;\r\n}\r\n\r\n.breakingNews:hover {\r\n  color: orange;\r\n}\r\n\r\nfooter li {\r\n  color: white;\r\n}\r\n\r\n* {\r\n  box-sizing: border-box;\r\n}\r\nbody {\r\n  margin: 0;\r\n}\r\n.title_p {\r\n  font-size: 18px;\r\n  margin-bottom: 40px;\r\n  border-bottom: 1px dotted black;\r\n  cursor: pointer;\r\n}\r\n.title_p:hover {\r\n  color: blue;\r\n  font-size: 22px;\r\n}\r\n.headermain {\r\n  width: 100%;\r\n  text-align: center;\r\n  /* border: 2px solid red; */\r\n  border-radius: 10px 10px 0 0;\r\n  justify-content: space-between;\r\n  margin: auto;\r\n  margin-bottom: 30px;\r\n}\r\n.title {\r\n  background-color: rgb(209, 3, 3);\r\n  color: bisque;\r\n  width: 100%;\r\n  margin: auto;\r\n  text-align: center;\r\n  font-size: 30px;\r\n  height: 90px;\r\n  /* border-radius: 10px 10px 0 0; */\r\n  line-height: 90px;\r\n  /* border: 0.5px solid white; */\r\n}\r\n.headerhome {\r\n  font-size: 10px;\r\n  background-color: black;\r\n  color: bisque;\r\n  display: flex;\r\n  justify-content: space-around;\r\n  height: 40px;\r\n  padding: 0 200px;\r\n  /* border-radius: 0 0 10px 10px; */\r\n  /* border: 0.5px solid white; */\r\n}\r\n.homeHeader {\r\n  cursor: pointer;\r\n  font-size: 20px;\r\n  display: flex;\r\n  justify-content: space-between;\r\n  margin: auto;\r\n  text-align: center;\r\n  align-items: center;\r\n  margin-left: 20px;\r\n}\r\n.homeHeader:hover {\r\n  color: orange;\r\n}\r\n.newsHeader {\r\n  cursor: pointer;\r\n  font-size: 20px;\r\n  margin: auto;\r\n  text-align: center;\r\n  align-items: center;\r\n}\r\n.newsHeader:hover {\r\n  color: orange;\r\n}\r\n.categoryHeader {\r\n  cursor: pointer;\r\n  font-size: 20px;\r\n  margin: auto;\r\n  text-align: center;\r\n  align-items: center;\r\n  margin-right: 20px;\r\n}\r\n.categoryHeader:hover {\r\n  color: orange;\r\n}\r\n.main_block {\r\n  display: flex;\r\n  max-width: 1140px;\r\n  min-height: 1100px;\r\n  justify-content: space-between;\r\n  margin: auto;\r\n}\r\n\r\n.all_news_block {\r\n  background-color: white;\r\n  height: 50%;\r\n  width: 70%;\r\n  box-shadow: 14px 10px 36px -4px rgba(34, 60, 80, 0.2);  border-radius: 20px;\r\n  padding: 20px;\r\n  border: 2px solid black;\r\n}\r\n\r\n.left_block {\r\n  min-height: 1000px;\r\n  width: 25%;\r\n  border-radius: 20px;\r\n}\r\n\r\n.categories_block {\r\n  min-height: 150px;\r\n  background-color: white;\r\n  margin-bottom: 50px;\r\n  box-shadow: 14px 10px 36px -4px rgba(34, 60, 80, 0.2);\r\n    border-radius: 20px;\r\n    border: 2px solid black;\r\n}\r\n\r\n.last_news {\r\n  min-height: 300px;\r\n  background-color: white;\r\n  box-shadow: 14px 10px 36px -4px rgba(34, 60, 80, 0.2);\r\n  border-radius: 20px;\r\n  border: 2px solid black;\r\n}\r\n\r\n.back {\r\n  text-align: right;\r\n  text-decoration: underline;\r\n  cursor: pointer;\r\n  color: blue;\r\n  font-size: 18px;\r\n}\r\n.commentator_paragraph {\r\n  color: rgb(5, 5, 104);\r\n  font-weight: bold;\r\n  font-size: 18px;\r\n  font-family: sans-serif;\r\n}\r\n.commentator_paragraph:hover {\r\n  text-decoration: underline;\r\n  cursor: pointer;\r\n}\r\n.title_paragraph {\r\n  /* border-bottom: 1px solid black; */\r\n  /* opacity: 0.25; */\r\n  margin-left: 10px;\r\n}\r\n.comments_chap{\r\n  font-weight: bold;\r\n  margin-top: 90px;\r\n  border-top: 1px solid black;\r\n  line-height: 80px;\r\n  font-size: 24px;\r\n}"],"sourceRoot":""}]);
+
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -1745,7 +1832,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./header */ "./header.js");
 /* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./main */ "./main.js");
 /* harmony import */ var _style__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./style */ "./style.css");
-/* harmony import */ var _getComments__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./getComments */ "./getComments.js");
+/* harmony import */ var _getCategory__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./getCategory */ "./getCategory.js");
 /* harmony import */ var _getNews__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./getNews */ "./getNews.js");
 // eslint-disable-next-line import/no-unresolved
 
@@ -1756,8 +1843,13 @@ __webpack_require__.r(__webpack_exports__);
 
 (0,_main__WEBPACK_IMPORTED_MODULE_2__["default"])();
 (0,_getNews__WEBPACK_IMPORTED_MODULE_5__["default"])();
+(0,_getCategory__WEBPACK_IMPORTED_MODULE_4__["default"])();
 (0,_header__WEBPACK_IMPORTED_MODULE_1__["default"])();
 (0,_footer__WEBPACK_IMPORTED_MODULE_0__["default"])();
+var homeDiv = document.querySelector(".homeHeader");
+homeDiv.addEventListener("click", function () {
+  (0,_getNews__WEBPACK_IMPORTED_MODULE_5__["default"])();
+});
 }();
 /******/ })()
 ;
