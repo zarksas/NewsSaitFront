@@ -1,12 +1,12 @@
 import state from "./state";
-import renderNewsCategory from "./renders/renderNewsCategory";
+import renderNews from "./renders/renderNews";
 
 const getNewsCategory = (id) => {
   fetch(`http://localhost:3000/news/category/${id}`)
     .then((res) => res.json())
     .then((news) => {
-      state.newsCategory = news;
-      renderNewsCategory();
+      state.news = news;
+      renderNews();
     });
 };
 

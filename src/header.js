@@ -1,3 +1,5 @@
+import renderNews from "./renders/renderNews";
+
 const header = () => {
   const headerMain = document.createElement("header");
   const titleDiv = document.createElement("div");

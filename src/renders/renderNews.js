@@ -24,6 +24,7 @@ const renderNews = async () => {
       back.addEventListener("click", () => {
         renderNews();
       });
+
       News.append(title, p, back);
     });
   });

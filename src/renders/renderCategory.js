@@ -1,7 +1,7 @@
 import state from "../state";
 import getNewsCategory from "../getNewsCategory";
 
-const renderCategory = (id) => {
+const renderCategory = () => {
   const categoriesBlock = document.querySelector(".categories_block");
   categoriesBlock.textContent = "";
   state.categories.forEach((category) => {
