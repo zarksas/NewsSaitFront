@@ -4,7 +4,9 @@ const renderComments = async () => {
   const lastNews = document.querySelector(".all_news_block");
   const commetnsChap = document.createElement("p");
   commetnsChap.classList.add("comments_chap");
-  commetnsChap.textContent = "Comments";
+  
+  commetnsChap.textContent = "Comments:";
+
   state.comments.forEach((comment) => {
     const titleParagraph = document.createElement("p");
     const comentatorParagraph = document.createElement("p");
