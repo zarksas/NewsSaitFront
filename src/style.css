@@ -126,7 +126,7 @@ body {
 .main_block {
   display: flex;
   max-width: 1140px;
-  min-height: 1100px;
+  min-height: 1140px;
   justify-content: space-between;
   margin: auto;
 }
@@ -148,11 +148,20 @@ body {
 
 .categories_block {
   min-height: 150px;
+  height: 100px;
   background-color: white;
   margin-bottom: 50px;
   box-shadow: 14px 10px 36px -4px rgba(34, 60, 80, 0.2);
     border-radius: 20px;
     border: 2px solid black;
+    text-align: center;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.categories_block p:hover{
+  color: blue;
 }
 
 .last_news {
@@ -191,4 +200,10 @@ body {
   border-top: 1px solid black;
   line-height: 80px;
   font-size: 24px;
+}
+.img{
+  width: 100%;
+  border-radius: 20px;
+  /* border: 2px solid black; */
+  display: block;
 }
