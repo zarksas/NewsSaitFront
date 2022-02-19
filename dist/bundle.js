@@ -145,7 +145,7 @@ var getNews = function getNews() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./state */ "./state.js");
-/* harmony import */ var _renders_renderNewsCategory__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./renders/renderNewsCategory */ "./renders/renderNewsCategory.js");
+/* harmony import */ var _renders_renderNews__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./renders/renderNews */ "./renders/renderNews.js");
 
 
 
@@ -153,8 +153,8 @@ var getNewsCategory = function getNewsCategory(id) {
   fetch("http://localhost:3000/news/category/".concat(id)).then(function (res) {
     return res.json();
   }).then(function (news) {
-    _state__WEBPACK_IMPORTED_MODULE_0__["default"].newsCategory = news;
-    (0,_renders_renderNewsCategory__WEBPACK_IMPORTED_MODULE_1__["default"])();
+    _state__WEBPACK_IMPORTED_MODULE_0__["default"].news = news;
+    (0,_renders_renderNews__WEBPACK_IMPORTED_MODULE_1__["default"])();
   });
 };
 
@@ -239,7 +239,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var renderCategory = function renderCategory(id) {
+var renderCategory = function renderCategory() {
   var categoriesBlock = document.querySelector(".categories_block");
   categoriesBlock.textContent = "";
   _state__WEBPACK_IMPORTED_MODULE_0__["default"].categories.forEach(function (category) {
@@ -380,34 +380,6 @@ var renderNews = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ "./renders/renderNewsCategory.js":
-/*!***************************************!*\
-  !*** ./renders/renderNewsCategory.js ***!
-  \***************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../state */ "./state.js");
-/* harmony import */ var _getComments__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../getComments */ "./getComments.js");
-
-
-
-var renderNewsCategory = function renderNewsCategory() {
-  var allNewsBlock = document.querySelector(".all_news_block");
-  allNewsBlock.textContent = "";
-  _state__WEBPACK_IMPORTED_MODULE_0__["default"].newsCategory.forEach(function (news) {
-    var titleNewsParagraph = document.createElement("p");
-    titleNewsParagraph.classList.add("title_p");
-    titleNewsParagraph.textContent = news.title;
-    allNewsBlock.append(titleNewsParagraph);
-  });
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (renderNewsCategory);
-
-/***/ }),
-
 /***/ "./state.js":
 /*!******************!*\
   !*** ./state.js ***!
@@ -419,8 +391,7 @@ __webpack_require__.r(__webpack_exports__);
 var initialisationState = {
   news: [],
   categories: [],
-  comments: [],
-  newsCategory: []
+  comments: []
 };
 /* harmony default export */ __webpack_exports__["default"] = (initialisationState);
 
